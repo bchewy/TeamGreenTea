@@ -1,3 +1,12 @@
 from django.db import models
 
 # Create your models here.
+class Category(models.Model):
+    name = models.CharField(max_length=25)
+
+class Item(models.Model):
+    title = models.CharField(max_length=75)
+    body = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
+    last_modified = models.DateTimeField(auto_now=True)
+    categories = models.ManyToManyField('Category', related_name='items')

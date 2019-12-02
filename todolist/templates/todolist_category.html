@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block page_content %}
+<div class="col-md-8 offset-md-2">
+    <h1>{{ category | title }}</h1>
+    <hr>
+    {% for item in items %}
+    <h2><a href="{% url 'todolist_detail' item.pk%}">{{ item.title }}</a></h2>
+    <small>
+        {{ item.created_on.date }} |&nbsp;
+        Categories:&nbsp;
+        {% for category in item.categories.all %}
+        <a href="{% url 'todolist_category' category.name %}">
+            {{ category.name }}
+        </a>&nbsp;
+        {% endfor %}
+    </small>
+    <p>{{ item.body | slice:":400" }}...</p>
+    {% endfor %}
+</div>
+{% endblock %}
