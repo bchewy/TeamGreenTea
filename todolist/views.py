@@ -33,3 +33,7 @@ def todolist_detail(request, pk):
         "item": item,
     }
     return render(request, "todolist_detail.html", context) 
+
+
+def todolist_contributions(request):
+    return render(request, "todolist_contributions.html")
