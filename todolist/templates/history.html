@@ -1,9 +1,33 @@
-<h1>Todo History Page!</h1>
+{% extends "base.html" %}
+{% block page_content %}
 
-<ul>
-    {% for todo_item in all_items %}
-        <li> 
-            {{todo_item.content}} was {{ todo_item.get_action_display}} on {{todo_item.created_at}}
-        </li>
-    {% endfor %}
-</ul>
+<h1 class="text-center">Todo History Page!</h1>
+    <form action="/clearHistory/" method="post">{% csrf_token %}
+        <input class="btn btn-warning btn-block" type="submit" value="Clear History"/>
+    </form>
+
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Todo Content</th>
+                <th scope="col">Action</th>
+                <th scope="col">Performed on</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for todo_item in all_items %}
+            <tr>
+                <th scope="row">{{todo_item.id}}</th>
+                <td>{{todo_item.content}}</td>
+                <td>{{ todo_item.get_action_display}}</td>
+                <td>{{todo_item.created_at}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+
+
+{% endblock %}

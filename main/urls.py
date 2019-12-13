@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from todolist.views import todoView, addTodo, deleteTodo, updateTodo, todoArchived, deleteTodoArchived, restoreTodoArchived, archiveTodo, todoHistoryView
+from todolist.views import todoView, addTodo, deleteTodo, updateTodo, todoArchived, deleteTodoArchived, restoreTodoArchived, archiveTodo, todoHistoryView, todoHistoryClear
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -32,6 +32,7 @@ urlpatterns = [
     path("restoreArchive/<int:pk>/", restoreTodoArchived),
     # Routes for history/logging
     path("todo_history/", todoHistoryView),
+    path("clearHistory/", todoHistoryClear),
 
 
 ]

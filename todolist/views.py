@@ -31,6 +31,8 @@ def archiveTodo(request, pk):
     todo_item.delete()
     newArchivedItem = TodoItemArchived(content = todo_content)
     newArchivedItem.save()
+    logger_object = TodoItemLogger(content = todo_item.content, action='AR')
+    logger_object.save()
     return HttpResponseRedirect('/todo/')
 
 # Updating todoItem
@@ -49,7 +51,10 @@ def todoArchived(request):
 
 def deleteTodoArchived(request, pk):
     archived_todo = TodoItemArchived.objects.get(id = pk)
+    todo_item_content = archived_todo.content
     archived_todo.delete()
+    logger_object = TodoItemLogger(content = todo_item_content, action='DA')
+    logger_object.save()
     return HttpResponseRedirect('/todoArchived/')
 
 def restoreTodoArchived(request, pk):
@@ -57,6 +62,8 @@ def restoreTodoArchived(request, pk):
     todo_content = archived_todo.content
     newTodo = TodoItem(content = todo_content)
     newTodo.save()
+    logger_object = TodoItemLogger(content = todo_content, action='RA')
+    logger_object.save()
     archived_todo.delete()
     return HttpResponseRedirect('/todoArchived/')
 
@@ -66,6 +73,9 @@ def todoHistoryView(request):
     all_todos_items = TodoItemLogger.objects.all()
     return render(request, 'history.html', {'all_items':all_todos_items})
 
+def todoHistoryClear(request):
+    TodoItemLogger.objects.all().delete()
+    return HttpResponseRedirect('/todo_history/')
 
 
 # Others
