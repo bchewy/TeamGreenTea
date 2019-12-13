@@ -1,0 +1,17 @@
+<h1>Todo Page!</h1>
+
+<ul>
+    {% for todo_item in all_items %}
+        <li> 
+            {{ todo_item.content }}
+            <form action="/deleteArchive/{{todo_item.id}}/" style="display:inline;" method="post">{% csrf_token %}
+                <input type="submit" value="Delete"/>
+            </form>
+            <form action="/restoreArchive/{{todo_item.id}}/" style="display:inline;" method="post">{% csrf_token %}
+                <input type="submit" value="Restore"/>
+            </form>
+        </li>
+    {% empty %}
+        <strong>There is nothing archived. Return to <a href="/todo/">todos.</a> </strong>
+    {% endfor %}
+</ul>

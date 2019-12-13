@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import ListView, DetailView 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import TodoItem, Item
+from .models import TodoItem, Item, TodoItemArchived
 
 # Todo Items (todoView is the main todo view)
 def todoView(request):
@@ -16,17 +16,51 @@ def addTodo(request):
     return HttpResponseRedirect('/todo/')
 
 # Deleting todoItem
-def deleteTodo(request, todo_id):
-    todo_item = TodoItem.objects.get(id = todo_id)
+def deleteTodo(request, pk):
+    todo_item = TodoItem.objects.get(id = pk)
     todo_item.delete()
     return HttpResponseRedirect('/todo/')
 
+def archiveTodo(request, pk):
+    todo_item = TodoItem.objects.get(id = pk)
+    todo_content = todo_item.content
+    todo_item.delete()
+    newArchivedItem = TodoItemArchived(content = todo_content)
+    newArchivedItem.save()
+    return HttpResponseRedirect('/todo/')
+
 # Updating todoItem
-def updateTodo(request, todo_id):
-    todo_item = TodoItem.objects.get(id = todo_id)
+def updateTodo(request, pk):
+    todo_item = TodoItem.objects.get(id = pk)
     todo_item.content = request.POST['content']
     todo_item.save()
     return HttpResponseRedirect('/todo/')
+
+
+
+# CRUD todoItemArchived
+def todoArchived(request):
+    all_archived_todos_items = TodoItemArchived.objects.all()
+    return render(request, 'todo_archived.html', {'all_items':all_archived_todos_items})
+
+def deleteTodoArchived(request, pk):
+    archived_todo = TodoItemArchived.objects.get(id = pk)
+    archived_todo.delete()
+    return HttpResponseRedirect('/todoArchived/')
+
+def restoreTodoArchived(request, pk):
+    archived_todo = TodoItemArchived.objects.get(id = pk)
+    todo_content = archived_todo.content
+    newTodo = TodoItem(content = todo_content)
+    newTodo.save()
+    archived_todo.delete()
+    return HttpResponseRedirect('/todoArchived/')
+
+
+
+
+
+
 
 # Others
 def todolist_index(request):

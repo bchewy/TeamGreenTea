@@ -11,6 +11,9 @@
             <form action="/deleteTodo/{{todo_item.id}}/" style="display:inline;" method="post">{% csrf_token %}
                 <input type="submit" value="Delete"/>
             </form>
+            <form action="/archiveTodo/{{todo_item.id}}/" style="display:inline;" method="post">{% csrf_token %}
+                <input type="submit" value="Archive"/>
+            </form>
         </li>
     {% endfor %}
 </ul>
