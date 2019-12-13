@@ -2,6 +2,12 @@
 
 a functional todoList application
 
+#### Features
+- In built authentication (logging in / signing up)
+- In built Django Administration dashboard
+- Simple todo list with logging for all CRUD Methods
+
+
 ##### How to start:
 ```
 python3 manage.py makemigrations
