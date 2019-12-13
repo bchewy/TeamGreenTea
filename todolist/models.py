@@ -14,6 +14,8 @@ class Item(models.Model):
 # TodoItem Model
 class TodoItem(models.Model):
     content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 class TodoItemArchived(models.Model):
     content = models.TextField()

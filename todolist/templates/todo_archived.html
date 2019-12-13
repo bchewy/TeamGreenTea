@@ -3,7 +3,7 @@
 <ul>
     {% for todo_item in all_items %}
         <li> 
-            {{ todo_item.content }}
+            {{ todo_item.content }}, <b>Archived on: </b>{{todo_item.created_at}}
             <form action="/deleteArchive/{{todo_item.id}}/" style="display:inline;" method="post">{% csrf_token %}
                 <input type="submit" value="Delete"/>
             </form>
