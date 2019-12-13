@@ -10,3 +10,7 @@ class Item(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
     categories = models.ManyToManyField('Category', related_name='items')
+
+# TodoItem Model
+class TodoItem(models.Model):
+    content = models.TextField()
