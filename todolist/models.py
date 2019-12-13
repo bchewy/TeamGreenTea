@@ -12,6 +12,9 @@ class Item(models.Model):
     last_modified = models.DateTimeField(auto_now=True)
     categories = models.ManyToManyField('Category', related_name='items')
 
+
+
+
 # TodoItem Model
 class TodoItem(models.Model):
     content = models.TextField()
@@ -20,5 +23,16 @@ class TodoItem(models.Model):
 
 class TodoItemArchived(models.Model):
     content = models.TextField()
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
+
+class TodoItemLogger(models.Model):
+    TYPE = (
+        ('A','Added'),
+        ('D','Deleted'),
+        ('U','Updated'),
+    )
+    content = models.TextField()
+    action = models.CharField(max_length=1, choices=TYPE) # Can use object.action_display() to show 'Added' instead of 'A' with object.action
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)

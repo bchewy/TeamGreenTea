@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import ListView, DetailView 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import TodoItem, Item, TodoItemArchived
+from .models import TodoItem, Item, TodoItemArchived, TodoItemLogger
 
 # Todo Items (todoView is the main todo view)
 def todoView(request):
@@ -11,14 +11,18 @@ def todoView(request):
 
 # Creating todoItem
 def addTodo(request):
-    newTodo = TodoItem(content = request.POST['content'])
-    newTodo.save()
+    todo_item = TodoItem(content = request.POST['content'])
+    todo_item.save()
+    logger_object = TodoItemLogger(content = todo_item.content, action='A')
+    logger_object.save()
     return HttpResponseRedirect('/todo/')
 
 # Deleting todoItem
 def deleteTodo(request, pk):
     todo_item = TodoItem.objects.get(id = pk)
     todo_item.delete()
+    logger_object = TodoItemLogger(content = todo_item.content, action='D')
+    logger_object.save()
     return HttpResponseRedirect('/todo/')
 
 def archiveTodo(request, pk):
@@ -57,8 +61,10 @@ def restoreTodoArchived(request, pk):
     return HttpResponseRedirect('/todoArchived/')
 
 
-
-
+# Logger
+def todoHistoryView(request):
+    all_todos_items = TodoItemLogger.objects.all()
+    return render(request, 'history.html', {'all_items':all_todos_items})
 
 
 

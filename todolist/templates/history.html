@@ -1,0 +1,9 @@
+<h1>Todo History Page!</h1>
+
+<ul>
+    {% for todo_item in all_items %}
+        <li> 
+            {{todo_item.content}} was {{ todo_item.get_action_display}} on {{todo_item.created_at}}
+        </li>
+    {% endfor %}
+</ul>
