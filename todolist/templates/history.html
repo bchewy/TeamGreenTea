@@ -2,6 +2,8 @@
 {% block page_content %}
 
 <h1 class="text-center">Todo History Page!</h1>
+{% if user.is_authenticated %}
+
     <form action="/clearHistory/" method="post">{% csrf_token %}
         <input class="btn btn-warning btn-block" type="submit" value="Clear History"/>
     </form>
@@ -27,7 +29,9 @@
         </tbody>
     </table>
 
-
-
-
+    {% else %}
+    <div class="alert alert-warning" role="alert">
+        You're not logged in!
+      </div>
+    {% endif %}
 {% endblock %}

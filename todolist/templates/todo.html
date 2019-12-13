@@ -4,6 +4,9 @@
 
 <div>
     <h2 class="text-center">Todos | Team Green Tea</h2>
+
+    {% if user.is_authenticated %}
+
     <div class="jumbotron">
         <div class="list-group">
             {% for todo_item in all_items %}
@@ -50,5 +53,11 @@
     </div>
 
 </div>
+
+{% else %}
+<div class="alert alert-warning" role="alert">
+    You're not logged in!
+  </div>
+{% endif %}
 {% endblock %}
 

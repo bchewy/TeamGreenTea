@@ -2,15 +2,7 @@
 {% block page_content %}
 
 <h1 class="text-center">Todo Archive</h1>
-
-<ul>
-    {% for todo_item in all_items %}
-        <li> 
-            {{ todo_item.content }}, <b>Archived on: </b>{{todo_item.created_at}}
-
-        </li>
-
-    {% endfor %}
+{% if user.is_authenticated %}
 
 
     <div class="jumbotron">
@@ -45,5 +37,9 @@
     </div>
 
 
-</ul>
+    {% else %}
+    <div class="alert alert-warning" role="alert">
+        You're not logged in!
+      </div>
+    {% endif %}
 {% endblock %}

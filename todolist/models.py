@@ -1,5 +1,7 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth import get_user_model
+
 
 # Create your models here.
 class Category(models.Model):
@@ -18,6 +20,12 @@ class TodoItem(models.Model):
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
     tags = models.ManyToManyField('Tag')
+    user = models.ForeignKey(
+      get_user_model(),
+      on_delete=models.CASCADE
+    )
+    
+
 
 class Tag(models.Model):
     name = models.CharField(max_length=25)

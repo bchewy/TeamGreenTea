@@ -18,7 +18,9 @@ from django.urls import include, path
 from todolist.views import todoView, addTodo, deleteTodo, updateTodo, todoArchived, deleteTodoArchived, restoreTodoArchived, archiveTodo, todoHistoryView, todoHistoryClear
 
 urlpatterns = [
+    path("",todoView),
     path('admin/', admin.site.urls),
+    path('accounts/', include('django.contrib.auth.urls')),
     path("todolist/", include("todolist.urls")),
     # Routes for todos
     path("todo/", todoView),

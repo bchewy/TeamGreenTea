@@ -6,12 +6,16 @@ from .models import TodoItem, Item, TodoItemArchived, TodoItemLogger
 
 # Todo Items (todoView is the main todo view)
 def todoView(request):
-    all_todos_items = TodoItem.objects.all()
+    # all_todos_items = TodoItem.objects.all()
+    if request.user.is_authenticated:
+        all_todos_items = TodoItem.objects.filter(user=request.user)
+    else:
+        all_todos_items = []
     return render(request, 'todo.html', {'all_items':all_todos_items})
 
 # Creating todoItem
 def addTodo(request):
-    todo_item = TodoItem(content = request.POST['content'])
+    todo_item = TodoItem(content = request.POST['content'], user=request.user)
     todo_item.save()
     logger_object = TodoItemLogger(content = todo_item.content, action='A')
     logger_object.save()
