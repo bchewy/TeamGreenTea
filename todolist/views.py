@@ -43,6 +43,8 @@ def archiveTodo(request, pk):
 def updateTodo(request, pk):
     todo_item = TodoItem.objects.get(id = pk)
     todo_item.content = request.POST['content']
+    logger_object = TodoItemLogger(content = todo_item.content, action='U')
+    logger_object.save()
     todo_item.save()
     return HttpResponseRedirect('/todo/')
 
