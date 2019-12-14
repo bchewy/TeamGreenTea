@@ -66,7 +66,7 @@ def deleteTodoArchived(request, pk):
 def restoreTodoArchived(request, pk):
     archived_todo = TodoItemArchived.objects.get(id = pk)
     todo_content = archived_todo.content
-    newTodo = TodoItem(content = todo_content)
+    newTodo = TodoItem(content = todo_content, user = request.user)
     newTodo.save()
     logger_object = TodoItemLogger(content = todo_content, action='RA')
     logger_object.save()
