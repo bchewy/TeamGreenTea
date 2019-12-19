@@ -13,10 +13,12 @@
             <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
                 <div class="d-flex w-100 justify-content-between">
                     <h5 class="mb-1">Todo Item # {{todo_item.id}}</h5>
-                    <small>{{todo_item.created_at}},
-                        TAGS:                 
+                    <small><b>Created on: </b>{{todo_item.created_at}},
+                        <b>Tags</b>:                 
                         {% for tags in todo_item.tags.all %}
                             {{ tags.name }},
+						{% empty %}
+							<i> none </i>
                         {% endfor %}
                     </small>
                 </div>
@@ -44,7 +46,7 @@
     </div>
     <div class="container-fluid">
         <div class="form-group">
-            <labe class="text-center">Add a new todo item here:</label>
+            <label class="text-center">Add a new todo item here:</label>
             <form class="" action="/addTodo/" method="post">
                 {% csrf_token %}
                 <input type="text" class="form-control m-1 valid" name="content" placeholder="What do you need to do?">

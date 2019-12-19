@@ -4,15 +4,15 @@ from django.contrib.auth import get_user_model
 
 
 # Create your models here.
-class Category(models.Model):
-    name = models.CharField(max_length=25)
+# class Category(models.Model):
+    # name = models.CharField(max_length=25)
 
-class Item(models.Model):
-    title = models.CharField(max_length=75)
-    body = models.TextField()
-    created_on = models.DateTimeField(auto_now_add=True)
-    last_modified = models.DateTimeField(auto_now=True)
-    categories = models.ManyToManyField('Category', related_name='items')
+# class Item(models.Model):
+    # title = models.CharField(max_length=75)
+    # body = models.TextField()
+    # created_on = models.DateTimeField(auto_now_add=True)
+    # last_modified = models.DateTimeField(auto_now=True)
+    # categories = models.ManyToManyField('Category', related_name='items')
 
 # TodoItem Model
 class TodoItem(models.Model):
@@ -23,12 +23,22 @@ class TodoItem(models.Model):
     user = models.ForeignKey(
       get_user_model(),
       on_delete=models.CASCADE
-    )
-    
-
+      )
+    # tags = models.ForeignKey('Tag', on_delete=models.CASCADE)
+      
+    def __str__(self):
+        return self.content
 
 class Tag(models.Model):
-    name = models.CharField(max_length=25)
+    name = models.CharField(max_length=25, unique=True)
+    # todoitems = models.ForeignKey('TodoItem', on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return self.name
+
+# class ItemTag(models.Model):
+    # todoitem = models.ForeignKey(TodoItem, on_delete=models.CASCADE)
+    # tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
 
 class TodoItemArchived(models.Model):
     content = models.TextField()
