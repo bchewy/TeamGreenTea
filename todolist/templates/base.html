@@ -2,20 +2,36 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-        <a class="navbar-brand" href="{% url 'todolist_index' %}">Green Tea To Do List</a>
+        <a class="navbar-brand" href="{% url 'todolist_index' %}">Team Green Tea</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
+            <!-- <li class="nav-item active">
               <a class="nav-link" href="{% url 'todolist_index' %}">Home</a>
+            </li> -->
+            <li class="nav-item">
+              <a class="nav-link" href="/todo">Todos</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'todolist_index' %}">#</a>
+              <a class="nav-link" href="/todoArchived">Archive</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/todo_history">History</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'todolist_contributions' %}">Contributions</a>
             </li>
           </ul>
+          <!-- Right side of the nav bar -->
+          {% if user.is_authenticated %}
+            Welcome, {{ user.username}}!&nbsp;&nbsp;&nbsp;
+            <a href="{% url 'logout' %}">Logout</a>
+          {% else %}
+            <a href="{% url 'login'%}">Login</a>
+          {% endif %}
         </div>
     </div>
 

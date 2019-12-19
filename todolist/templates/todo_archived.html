@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block page_content %}
+
+<h1 class="text-center">Todo Archive</h1>
+{% if user.is_authenticated %}
+
+
+    <div class="jumbotron">
+        <div class="list-group">
+            {% for todo_item in all_items %}
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Todo Item # {{todo_item.id}}</h5>
+                    <small><b>Archived on: </b>{{todo_item.created_at}},
+                        <b>Tags</b>:                 
+                        {% for tags in todo_item.tags.all %}
+                            [{{ tags.name }}],
+                        {% empty %}
+                            <i>none</i>
+                        {% endfor %}
+                    </small>
+                </div>
+                <p class="mb-1">{{ todo_item.content }}</p>
+                <div class="d-flex w-100 justify-content-end">
+                    <form action="/deleteArchive/{{todo_item.id}}/" style="display:inline;" method="post">{% csrf_token %}
+                        <input class="btn btn-danger mr-1" type="submit" value="Delete"/>
+                    </form>
+                    <form action="/restoreArchive/{{todo_item.id}}/" style="display:inline;" method="post">{% csrf_token %}
+                        <input class="btn btn-warning" type="submit" value="Restore"/>
+                    </form>
+                </div>
+            </a>
+            {% empty %}
+            <b class="text-center lead">There is nothing archived. Return to <a href="/todo/">todos.</a> </b>
+            {% endfor %}
+        </div>
+    </div>
+
+
+    {% else %}
+    <div class="alert alert-warning" role="alert">
+        You're not logged in!
+      </div>
+    {% endif %}
+{% endblock %}

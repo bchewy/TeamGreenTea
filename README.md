@@ -14,6 +14,10 @@ python3 manage.py makemigrations
 python3 manage.py migrate
 python3 manage.py runserver
 ```
+OR
+```
+docker-compose up
+```
 
 ##### Migrations have an issue?
 Try clearing the existing sqlite file (don't push please) and or read the above to reset all migration files

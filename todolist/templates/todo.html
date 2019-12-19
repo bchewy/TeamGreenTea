@@ -1,0 +1,65 @@
+
+{% extends "base.html" %}
+{% block page_content %}
+
+<div>
+    <h2 class="text-center">Todos | Team Green Tea</h2>
+
+    {% if user.is_authenticated %}
+
+    <div class="jumbotron">
+        <div class="list-group">
+            {% for todo_item in all_items %}
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Todo Item # {{todo_item.id}}</h5>
+                    <small>{{todo_item.created_at}},
+                        TAGS:                 
+                        {% for tags in todo_item.tags.all %}
+                            {{ tags.name }},
+                        {% endfor %}
+                    </small>
+                </div>
+                <p class="mb-1">{{ todo_item.content }}</p>
+                <div class="d-flex w-100 justify-content-end">
+                    <form class="mr-1" action="/updateTodo/{{todo_item.id}}/"method="post">
+                        {% csrf_token %}
+                        <input type="text" name="content" value="{{todo_item.content}}" />
+                        <input class="btn btn-success" type="submit" value="Update" />
+                    </form>
+                    <form class="mr-1" action="/deleteTodo/{{todo_item.id}}/"method="post">
+                        {% csrf_token %}
+                        <input class="btn btn-danger" type="submit" value="Delete" />
+                    </form>
+                    <form action="/archiveTodo/{{todo_item.id}}/" method="post">
+                        {% csrf_token %}
+                        <input class="btn btn-warning" type="submit" value="Archive" />
+                    </form>
+                </div>
+            </a>
+            {% empty %}
+            <b class="text-center lead">There's nothing in your todo list. ☹️ Add something?</b>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="form-group">
+            <labe class="text-center">Add a new todo item here:</label>
+            <form class="" action="/addTodo/" method="post">
+                {% csrf_token %}
+                <input type="text" class="form-control m-1 valid" name="content" placeholder="What do you need to do?">
+                <input class="btn btn-block btn-primary m-1" type="submit" value="Add" />
+            </form>
+          </div>
+
+    </div>
+
+</div>
+
+{% else %}
+<div class="alert alert-warning" role="alert">
+    You're not logged in!
+  </div>
+{% endif %}
+{% endblock %}
+

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block page_content %}
+
+<h1 class="text-center">Todo History Page!</h1>
+{% if user.is_authenticated %}
+
+<form action="/clearHistory/" method="post">{% csrf_token %}
+    <input class="btn btn-warning btn-block" type="submit" value="Clear History" />
+</form>
+
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">#id</th>
+            <th scope="col">Todo Content</th>
+            <th scope="col">Action</th>
+            <th scope="col">Performed on</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for todo_item in all_items %}
+        <tr>
+            <th scope="row">{{todo_item.id}}</th>
+            <td>{{todo_item.content}}</td>
+            {% if todo_item.action == "A" %}
+            <td class="table-success">{{ todo_item.get_action_display}}</td>
+            {% elif todo_item.action == "D" or todo_item.action == "DA" %}
+            <td class="table-danger">{{ todo_item.get_action_display}}</td>
+            {% elif todo_item.action == "U" %}
+            <td class="table-primary">{{ todo_item.get_action_display}}</td>
+            {% elif todo_item.action == "AR" %}
+            <td class="table-warning">{{ todo_item.get_action_display}}</td>
+            {% else %}
+            <td class="table-info">{{ todo_item.get_action_display}}</td>
+            {% endif %}
+            <td>{{todo_item.created_at}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% else %}
+<div class="alert alert-warning" role="alert">
+    You're not logged in!
+</div>
+{% endif %}
+{% endblock %}
