@@ -8,10 +8,10 @@ def test_sign_up_page():
     driver.get("http://localhost:8000/admin/")
     
     elemName = driver.find_element_by_name("username")
-    elemName.send_keys("admin")
+    elemName.send_keys("JunYoung")
 
     elemPassword = driver.find_element_by_name("password")
-    elemPassword.send_keys("admin123@")
+    elemPassword.send_keys("dishonored")
 
     elemPassword.send_keys(Keys.RETURN)
     driver.get("http://localhost:8000/admin/")
@@ -30,10 +30,10 @@ def test_sign_up_blank():
     driver.get("http://localhost:8000/admin/")
 
     elemName = driver.find_element_by_name("username")
-    elemName.send_keys("admin")
+    elemName.send_keys("JunYoung")
 
     elemPassword = driver.find_element_by_name("password")
-    elemPassword.send_keys("admin123@")
+    elemPassword.send_keys("dishonored")
 
     elemPassword.send_keys(Keys.RETURN)
     driver.get("http://localhost:8000/admin/")
@@ -59,10 +59,10 @@ def test_sign_up_UsernameConfirm_blank():
     driver.get("http://localhost:8000/admin/")
 
     elemName = driver.find_element_by_name("username")
-    elemName.send_keys("admin")
+    elemName.send_keys("JunYoung")
 
     elemPassword = driver.find_element_by_name("password")
-    elemPassword.send_keys("admin123@")
+    elemPassword.send_keys("dishonored")
 
     elemPassword.send_keys(Keys.RETURN)
     driver.get("http://localhost:8000/admin/")
@@ -88,10 +88,10 @@ def test_sign_up_PasswordConfirm_blank():
     driver.get("http://localhost:8000/admin/")
 
     elemName = driver.find_element_by_name("username")
-    elemName.send_keys("admin")
+    elemName.send_keys("JunYoung")
 
     elemPassword = driver.find_element_by_name("password")
-    elemPassword.send_keys("admin123@")
+    elemPassword.send_keys("dishonored")
 
     elemPassword.send_keys(Keys.RETURN)
     driver.get("http://localhost:8000/admin/")
@@ -117,10 +117,10 @@ def test_sign_up_UsernamePassword_blank():
     driver.get("http://localhost:8000/admin/")
 
     elemName = driver.find_element_by_name("username")
-    elemName.send_keys("admin")
+    elemName.send_keys("JunYoung")
 
     elemPassword = driver.find_element_by_name("password")
-    elemPassword.send_keys("admin123@")
+    elemPassword.send_keys("dishonored")
 
     elemPassword.send_keys(Keys.RETURN)
     driver.get("http://localhost:8000/admin/")
@@ -146,10 +146,10 @@ def test_sign_up_with_CPassword_blank():
     driver.get("http://localhost:8000/admin/")
 
     elemName = driver.find_element_by_name("username")
-    elemName.send_keys("admin")
+    elemName.send_keys("JunYoung")
 
     elemPassword = driver.find_element_by_name("password")
-    elemPassword.send_keys("admin123@")
+    elemPassword.send_keys("dishonored")
 
     elemPassword.send_keys(Keys.RETURN)
     driver.get("http://localhost:8000/admin/")
@@ -175,10 +175,10 @@ def test_sign_up_with_CPassword_wrong():
     driver.get("http://localhost:8000/admin/")
 
     elemName = driver.find_element_by_name("username")
-    elemName.send_keys("admin")
+    elemName.send_keys("JunYoung")
 
     elemPassword = driver.find_element_by_name("password")
-    elemPassword.send_keys("admin123@")
+    elemPassword.send_keys("dishonored")
 
     elemPassword.send_keys(Keys.RETURN)
     driver.get("http://localhost:8000/admin/")
@@ -204,10 +204,10 @@ def test_sign_up_with_CPassword_correct():
     driver.get("http://localhost:8000/admin/")
 
     elemName = driver.find_element_by_name("username")
-    elemName.send_keys("admin")
+    elemName.send_keys("JunYoung")
 
     elemPassword = driver.find_element_by_name("password")
-    elemPassword.send_keys("admin123@")
+    elemPassword.send_keys("dishonored")
 
     elemPassword.send_keys(Keys.RETURN)
     driver.get("http://localhost:8000/admin/")
@@ -216,7 +216,7 @@ def test_sign_up_with_CPassword_correct():
     
     driver.find_element_by_class_name("addlink").click()
     elemSUpName = driver.find_element_by_name("username")
-    elemSUpName.send_keys("JunYoung")
+    elemSUpName.send_keys("DarrenYap")
 
     elemSUpPassword = driver.find_element_by_name("password1")
     elemSUpPassword.send_keys("admin1234@")
