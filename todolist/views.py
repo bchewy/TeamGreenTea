@@ -3,8 +3,8 @@ from django.contrib.auth import login, logout, authenticate
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-<<<<<<< HEAD
 from .models import TodoItem, TodoItemArchived, TodoItemLogger
+from .models import Tag, TodoItem, TodoItemArchived, TodoItemLogger
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
@@ -19,9 +19,6 @@ def register(request):
     else:
         form = UserCreationForm()
     return render(request, 'register.html', {'form': form})
-=======
-from .models import Tag, TodoItem, TodoItemArchived, TodoItemLogger
->>>>>>> 6427bd033e92549e0c5320b6f1ff62cc4c44ed57
 
 # Todo Items (todoView is the main todo view)
 def todoView(request):
