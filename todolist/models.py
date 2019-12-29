@@ -2,7 +2,6 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth import get_user_model
 
-
 # Create your models here.
 # class Category(models.Model):
     # name = models.CharField(max_length=25)
