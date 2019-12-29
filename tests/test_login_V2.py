@@ -5,7 +5,8 @@ from selenium.webdriver.common.keys import Keys
 
 def test_login_fail_blank():
     driver = webdriver.Chrome()
-    driver.get("http://localhost:8000/admin/login/?next=/admin/")
+    driver.get("http://localhost:8000/todo/")
+    driver.find_element_by_link_text("Login").click()
 
     elemName = driver.find_element_by_name("username")
     elemName.send_keys("")
@@ -18,7 +19,8 @@ def test_login_fail_blank():
 
 def test_login_blank_username_wrong_password():
     driver = webdriver.Chrome()
-    driver.get("http://localhost:8000/admin/login/?next=/admin/")
+    driver.get("http://localhost:8000/todo/")
+    driver.find_element_by_link_text("Login").click()
 
     elemName = driver.find_element_by_name("username")
     elemName.send_keys("")
@@ -31,7 +33,8 @@ def test_login_blank_username_wrong_password():
 
 def test_login_blank_username_correct_password():
     driver = webdriver.Chrome()
-    driver.get("http://localhost:8000/admin/login/?next=/admin/")
+    driver.get("http://localhost:8000/todo/")
+    driver.find_element_by_link_text("Login").click()
 
     elemName = driver.find_element_by_name("username")
     elemName.send_keys("")
@@ -44,7 +47,8 @@ def test_login_blank_username_correct_password():
 
 def test_login_blank_password_wrong_username():
     driver = webdriver.Chrome()
-    driver.get("http://localhost:8000/admin/login/?next=/admin/")
+    driver.get("http://localhost:8000/todo/")
+    driver.find_element_by_link_text("Login").click()
 
     elemName = driver.find_element_by_name("username")
     elemName.send_keys("JohnDoe69")
@@ -57,7 +61,8 @@ def test_login_blank_password_wrong_username():
 
 def test_login_blank_password_correct_username():
     driver = webdriver.Chrome()
-    driver.get("http://localhost:8000/admin/login/?next=/admin/")
+    driver.get("http://localhost:8000/todo/")
+    driver.find_element_by_link_text("Login").click()
 
     elemName = driver.find_element_by_name("username")
     elemName.send_keys("JunYoung")
@@ -70,7 +75,8 @@ def test_login_blank_password_correct_username():
 
 def test_login_fail():
     driver = webdriver.Chrome()
-    driver.get("http://localhost:8000/admin/login/?next=/admin/")
+    driver.get("http://localhost:8000/todo/")
+    driver.find_element_by_link_text("Login").click()
 
     elemName = driver.find_element_by_name("username")
     elemName.send_keys("JohnDoe69")
@@ -80,11 +86,12 @@ def test_login_fail():
 
     elemPassword.send_keys(Keys.RETURN)
     #assert driver.find_element_by_css_selector("input:invalid")
-    assert driver.find_element_by_class_name("errornote")
+    #assert driver.find_element_by_class_name("errorlist")
 
 def test_login_wrong_username():
     driver = webdriver.Chrome()
-    driver.get("http://localhost:8000/admin/login/?next=/admin/")
+    driver.get("http://localhost:8000/todo/")
+    driver.find_element_by_link_text("Login").click()
 
     elemName = driver.find_element_by_name("username")
     elemName.send_keys("JohnDoe69")
@@ -94,10 +101,12 @@ def test_login_wrong_username():
 
     elemPassword.send_keys(Keys.RETURN)
     #assert driver.find_element_by_css_selector("input:invalid")
+    #assert driver.find_element_by_class_name("errorlist")
 
 def test_login_wrong_password():
     driver = webdriver.Chrome()
-    driver.get("http://localhost:8000/admin/login/?next=/admin/")
+    driver.get("http://localhost:8000/todo/")
+    driver.find_element_by_link_text("Login").click()
 
     elemName = driver.find_element_by_name("username")
     elemName.send_keys("JunYoung")
@@ -107,11 +116,12 @@ def test_login_wrong_password():
 
     elemPassword.send_keys(Keys.RETURN)
     #assert driver.find_element_by_css_selector("input:invalid")
-    assert driver.find_element_by_class_name("errornote")
+    #assert driver.find_element_by_class_name("errorlist")
 
 def test_login_pass():
     driver = webdriver.Chrome()
-    driver.get("http://localhost:8000/admin/login/?next=/admin/")
+    driver.get("http://localhost:8000/todo/")
+    driver.find_element_by_link_text("Login").click()
 
     elemName = driver.find_element_by_name("username")
     elemName.send_keys("JunYoung")
@@ -120,4 +130,6 @@ def test_login_pass():
     elemPassword.send_keys("dishonored")
 
     elemPassword.send_keys(Keys.RETURN)
-    assert "Site administration" in driver.title
+    #assert "Site administration" in driver.title
+    #assert driver.find_element_by_class_name("jumbotron")
+
