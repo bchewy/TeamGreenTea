@@ -26,8 +26,22 @@
                 <div class="d-flex w-100 justify-content-end">
                     <form class="mr-1" action="/updateTodo/{{todo_item.id}}/"method="post">
                         {% csrf_token %}
+						<!-- <label for="content">Edit item: </label> -->
                         <input type="text" name="content" value="{{todo_item.content}}" />
-                        <input class="btn btn-success" type="submit" value="Update" />
+						<input class="btn btn-success" type="submit" value="Update" />
+						<br/>
+						<!-- <label for="tags">tags:</label> -->
+						<select class="form-control form-control-sm mb-2 w-75" id="tags" name="tags">
+						<!-- <select class="custom-select custom-select-sm mb-2 w-75" id="tags" name="tags"> -->
+							<!-- {% for tag in field %} -->
+								<!-- <option> {{ tag }} </option> -->
+							<!-- {% endfor %} -->
+							<option></option>
+							<option>work</option>
+							<option>chores</option>
+							<option>self</option>
+						</select>
+                        <!-- <input type="text" name="tags" value="{{todo_item.tags.all | join:", "}}" /> -->
                     </form>
                     <form class="mr-1" action="/deleteTodo/{{todo_item.id}}/"method="post">
                         {% csrf_token %}
@@ -46,10 +60,17 @@
     </div>
     <div class="container-fluid">
         <div class="form-group">
-            <label class="text-center">Add a new todo item here:</label>
+            <label class="text-center"><b>Add a new todo item here:</b></label>
             <form class="" action="/addTodo/" method="post">
                 {% csrf_token %}
                 <input type="text" class="form-control m-1 valid" name="content" placeholder="What do you need to do?">
+				<label for="tag"><b>Tags:</b></label>
+				<select multiple class="form-control" name="tag" id="tag">
+					<option>work</option>
+					<option>chores</option>
+					<option>self</option>
+				</select>
+				<br/>
                 <input class="btn btn-block btn-primary m-1" type="submit" value="Add" />
             </form>
           </div>

@@ -3,6 +3,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+<<<<<<< HEAD
 from .models import TodoItem, TodoItemArchived, TodoItemLogger
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
@@ -18,6 +19,9 @@ def register(request):
     else:
         form = UserCreationForm()
     return render(request, 'register.html', {'form': form})
+=======
+from .models import Tag, TodoItem, TodoItemArchived, TodoItemLogger
+>>>>>>> 6427bd033e92549e0c5320b6f1ff62cc4c44ed57
 
 # Todo Items (todoView is the main todo view)
 def todoView(request):
@@ -30,8 +34,12 @@ def todoView(request):
 
 # Creating todoItem
 def addTodo(request):
+    tagname = request.POST['tag']
     todo_item = TodoItem(content=request.POST['content'], user=request.user)
     todo_item.save()
+    for tag in tagname:
+        tag = Tag.objects.get(name__exact=tagname)
+        todo_item.tags.add(tag.id)
     logger_object = TodoItemLogger(content=todo_item.content, action='A')
     logger_object.save()
     return HttpResponseRedirect('/todo/')
@@ -59,6 +67,19 @@ def archiveTodo(request, pk):
 def updateTodo(request, pk):
     todo_item = TodoItem.objects.get(id=pk)
     todo_item.content = request.POST['content']
+    # todo_item.tags.set([1])
+    tagname = request.POST['tags']
+    # tagname = request.POST.get('tags')
+    # tagname = "work"
+    if tagname == "":
+        todo_item.tags.clear()
+    else:
+        for tag in tagname:
+            tag = Tag.objects.get(name__exact=tagname)
+            todo_item.tags.add(tag.id)
+    # tag = Tag.objects.get(name__exact=tagname)
+    # todo_item.tags.set([tag.id])
+    # todo_item.tags.add(tag.id)
     logger_object = TodoItemLogger(content=todo_item.content, action='U')
     logger_object.save()
     todo_item.save()

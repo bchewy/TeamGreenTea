@@ -34,6 +34,10 @@ class Tag(models.Model):
     
     def __str__(self):
         return self.name
+    
+    # meta API get_field giveup
+    def get_field(self):
+        return Tag._meta.get_field('name')
 
 # class ItemTag(models.Model):
     # todoitem = models.ForeignKey(TodoItem, on_delete=models.CASCADE)
@@ -54,6 +58,7 @@ class TodoItemLogger(models.Model):
         ('RA','Restored Archive'), # Restored a todoitem
     )
     content = models.TextField()
+    # tags = models.ManyToManyField("Tag")
     action = models.CharField(max_length=1, choices=TYPE) # Can use object.action_display() to show 'Added' instead of 'A' with object.action
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
